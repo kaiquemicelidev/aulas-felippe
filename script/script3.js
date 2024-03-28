@@ -1,8 +1,8 @@
 
 //Ao clicar no botão salvar vai ter que conferir se todos os campos estao
 //preenchidos e então exibir
-$(".btnsalvar").on('click',function(event){
-    event.preventDefault(); //para evitar reload na pagina
+$(".btnsalvar").on('click',function(e){
+    e.preventDefault(); //para evitar reload na pagina
     let status = '';
     if($(".txtNome").val().length < 3){ //nome precisa ter mais de 2 caracteres
         status = status + '<br />Campo Nome inválido';
@@ -14,11 +14,15 @@ $(".btnsalvar").on('click',function(event){
         status = status + '<br />Escolha a cidade mais próxima'
     }
 
-    if(status.length > 2) console.log(status); //caso faltou algum campo exiba
+    if(status.length > 2){
+        //caso faltou algum campo
+        $(".alertmessage").html(status);
+        $(".alertmessage").css('background','red');
+    }
     else console.log( //caso não exiba os campos
     $(".txtNome").val() + ' - ' +
      $(".selSexo").val() + ' - ' +
-     $("input[name='ufs']").val() + ' - ' +
+     $("input[name='ufs']:checked").val() + ' - ' +
      $(".selCidade").val()
      );
 
@@ -54,3 +58,5 @@ $("input[name='ufs']").on('change',function(){
         }
 
     });
+
+
